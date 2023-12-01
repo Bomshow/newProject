@@ -2,7 +2,7 @@
 
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-Given("estoy en la cosina", () => {
+Given("estoy en la cocina", () => {
     cy.visit('https://pagos-test.coordinadora.com/7Coxw1Q7ZaquOnFyF5xE') // change URL to match your dev URL
 
     cy.get(':nth-child(1) > .MuiTypography-h4').should('have.text', '73940666356')
@@ -44,6 +44,16 @@ Given("estoy en la cosina", () => {
     cy.get('.PrivateSwitchBase-input').should('not.be.checked')
 
     //DILIGENCIAR FORMULARIO APPROBE Y BOTÓN CONTINUAR
+
+    //Press cancel and go back the previous lading page
+    cy.get('.css-iol86l > .MuiButtonBase-root').click()
+    cy.url().should('contain', 'https://pagos-test.coordinadora.com/')
+
+    cy.get(':nth-child(1) > .MuiBox-root > .MuiButtonBase-root').click()
+
+    cy.wait(5000)
+
+    //Press credit form and try every single field
     cy.get('.css-1ebhcds').click()
     cy.get('.css-180rpdb > :nth-child(1) > .MuiFormControl-root > .MuiInputBase-root').type('Juan Pablo')
 
